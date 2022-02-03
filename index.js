@@ -2,12 +2,13 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const express = require('express')
 const cors = require('cors')
-const PORT = 8000
+const dotenv = require('dotenv')
+dotenv.config()
 
 const app = express()
 app.use(cors())
 
-const url = 'https://www.theguardian.com/international'
+const url = process.env.WEB_URL
 
 app.get('/', function (req, res) {
   res.json('This is my webscraper')
@@ -33,4 +34,6 @@ app.get('/results', (req, res) => {
     .catch((err) => console.log(err))
 })
 
-app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))
+app.listen(process.env.PORT, () =>
+  console.log(`Server running on PORT ${process.env.PORT}`)
+)
